@@ -133,7 +133,7 @@ pytest
 ## 📌 Remarques
 
 ⚠️ Ce projet est **un examen universitaire**, il n’est **pas prévu pour une utilisation en production**.  
-✅ Il est conçu pour illustrer la **programmation réseau sécurisée** en Python.  
+✅ Il est conçu pour illustrer la **programmation réseau** en Python.  
 💡 Vous pouvez le modifier pour tester d’autres types d’attaques et renforcer la sécurité.
 
 ---
