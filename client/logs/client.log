@@ -1,0 +1,10 @@
+2025-02-16 18:00:47,133 - __main__ - INFO - Envoi de la requête: TESTPIN 123456 0000
+2025-02-16 18:00:47,144 - __main__ - ERROR - Erreur lors de l'envoi de la requête: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: IP address mismatch, certificate is not valid for '127.0.0.1'. (_ssl.c:1007)
+2025-02-16 18:08:22,082 - __main__ - INFO - Envoi de la requête: TESTPIN 123456 0000
+2025-02-16 18:08:22,090 - __main__ - ERROR - Erreur lors de l'envoi de la requête: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: IP address mismatch, certificate is not valid for '127.0.0.1'. (_ssl.c:1007)
+2025-02-16 18:09:06,743 - __main__ - INFO - Envoi de la requête: TESTPIN 123456 0000
+2025-02-16 18:09:06,754 - __main__ - ERROR - Erreur lors de l'envoi de la requête: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: IP address mismatch, certificate is not valid for '127.0.0.1'. (_ssl.c:1007)
+2025-02-16 18:14:53,516 - __main__ - INFO - Envoi de la requête: TESTPIN 123456 0000
+2025-02-16 18:14:53,526 - __main__ - ERROR - Erreur lors de l'envoi de la requête: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: IP address mismatch, certificate is not valid for '127.0.0.1'. (_ssl.c:1007)
+2025-02-16 18:33:06,559 - __main__ - INFO - Envoi de la requête: TESTPIN 123456 0000
+2025-02-16 19:33:27,343 - __main__ - INFO - Envoi de la requête: TESTPIN 123456 0000
