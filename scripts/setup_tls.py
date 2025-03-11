@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 def generate_server_cert(force=False):
     """
     Génère un certificat TLS pour le serveur avec SAN pour 127.0.0.1.
-    Si 'force' est True, il régénère même si un certificat existe déjà.
+    il régénère même si un certificat existe déjà.
     """
     server_cert_dir = os.path.join(os.path.dirname(__file__), '..', 'server', 'certs')
     os.makedirs(server_cert_dir, exist_ok=True)
@@ -40,7 +40,7 @@ def setup_client_ca(cert_path, force=False):
     """
     Configure le client pour qu'il reconnaisse le certificat du serveur en copiant
     le certificat du serveur dans le dossier client sous le nom ca.crt.
-    Si 'force' est True, il écrase le fichier existant.
+    il écrase le fichier existant.
     """
     client_cert_dir = os.path.join(os.path.dirname(__file__), '..', 'client', 'certs')
     os.makedirs(client_cert_dir, exist_ok=True)

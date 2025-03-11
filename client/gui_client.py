@@ -33,7 +33,7 @@ class BankClientApp:
         self.style = ttk.Style(self.root)
         # Choix d'un thème avec un look moderne (ici "plastik" apporte un style plat)
         self.root.set_theme("plastik")
-        # Palette de couleurs inspirée par l'univers bancaire
+        # Palette de couleurs
         navy = "#002147"        # Fond principal
         bleu_moyen = "#003366"    # Panneaux secondaires
         doré = "#D4AF37"        # Accents, titres et boutons
