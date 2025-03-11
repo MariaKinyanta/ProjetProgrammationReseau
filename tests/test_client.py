@@ -8,7 +8,7 @@ class TestClientCommands(unittest.TestCase):
     def test_retrait(self, mock_socket_class, mock_wrap_socket):
         mock_sock = MagicMock()
         mock_secure_sock = MagicMock()
-        # Simuler la réception en deux étapes : le message puis la fin (chunk vide)
+        # Simuler la réception en deux étapes : le message puis la fin
         mock_secure_sock.recv.side_effect = ["RETRAIT OK".encode("utf-8"), b""]
         mock_socket_class.return_value = mock_sock
         mock_wrap_socket.return_value = mock_secure_sock
