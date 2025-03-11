@@ -34,27 +34,50 @@ class BankClientApp:
         # Configuration du thème et du style
         self.style = ttk.Style(self.root)
         self.root.set_theme("plastik")
+        self.base_font_size = 12
+        self.base_header_size = 16
         navy = "#002147"
         bleu_moyen = "#003366"
         dore = "#D4AF37"
 
         self.style.configure("TFrame", background=navy)
-        self.style.configure("TLabel", background=navy, foreground="white", font=("Segoe UI", 12))
-        self.style.configure("Header.TLabel", background=navy, foreground=dore, font=("Segoe UI", 16, "bold"))
-        self.style.configure("TButton", font=("Segoe UI", 12, "bold"), padding=6,
+        self.style.configure("TLabel", background=navy, foreground="white", font=("Segoe UI", self.base_font_size))
+        self.style.configure("Header.TLabel", background=navy, foreground=dore, font=("Segoe UI", self.base_header_size, "bold"))
+        self.style.configure("TButton", font=("Segoe UI", self.base_font_size, "bold"), padding=6,
                              background=dore, foreground=navy, borderwidth=0)
         self.style.map("TButton", background=[("active", "#b7950b"), ("!active", dore)])
-        self.style.configure("Treeview", background="white", foreground=navy, fieldbackground="white", font=("Segoe UI", 11))
-        self.style.configure("Treeview.Heading", background=dore, foreground=navy, font=("Segoe UI", 12, "bold"))
+        self.style.configure("Treeview", background="white", foreground=navy, fieldbackground="white", font=("Segoe UI", self.base_font_size-1))
+        self.style.configure("Treeview.Heading", background=dore, foreground=navy, font=("Segoe UI", self.base_font_size, "bold"))
         self.style.configure("Login.TFrame", background=bleu_moyen, relief="flat")
-        self.style.configure("Login.TLabel", background=bleu_moyen, foreground="white", font=("Segoe UI", 12))
-        self.style.configure("Login.TEntry", font=("Segoe UI", 12))
+        self.style.configure("Login.TLabel", background=bleu_moyen, foreground="white", font=("Segoe UI", self.base_font_size))
+        self.style.configure("Login.TEntry", font=("Segoe UI", self.base_font_size))
 
         # Configuration pour rendre la fenêtre responsive
         self.root.grid_rowconfigure(0, weight=1)
         self.root.grid_columnconfigure(0, weight=1)
 
+        # Lier l'événement de redimensionnement pour ajuster la taille des polices
+        self.root.bind("<Configure>", self.on_resize)
+
         self.create_login_screen()
+
+    def on_resize(self, event):
+        """Ajuste dynamiquement la taille des polices selon la largeur de la fenêtre."""
+        try:
+            # Calcule un facteur d'échelle par rapport à la largeur de base de 900 pixels
+            scale_factor = event.width / 900
+            new_font_size = max(10, int(self.base_font_size * scale_factor))
+            new_header_size = max(12, int(self.base_header_size * scale_factor))
+
+            self.style.configure("TLabel", font=("Segoe UI", new_font_size))
+            self.style.configure("Header.TLabel", font=("Segoe UI", new_header_size, "bold"))
+            self.style.configure("Login.TLabel", font=("Segoe UI", new_font_size))
+            self.style.configure("Login.TEntry", font=("Segoe UI", new_font_size))
+            self.style.configure("TButton", font=("Segoe UI", new_font_size, "bold"), padding=int(6 * scale_factor))
+            self.style.configure("Treeview", font=("Segoe UI", max(new_font_size-1, 8)))
+            self.style.configure("Treeview.Heading", font=("Segoe UI", new_font_size, "bold"))
+        except Exception as e:
+            log.error("Erreur lors du redimensionnement: %s", e)
 
     def create_menu(self):
         menubar = tk.Menu(self.root, background="#001c33", foreground="white", activebackground="#001933")
@@ -84,11 +107,11 @@ class BankClientApp:
         login_frame.grid_columnconfigure(1, weight=1)
 
         ttk.Label(login_frame, text="Numéro de compte:", style="Login.TLabel").grid(row=0, column=0, sticky="w", pady=(0, 10))
-        self.account_entry = ttk.Entry(login_frame, font=("Segoe UI", 12))
+        self.account_entry = ttk.Entry(login_frame, font=("Segoe UI", self.base_font_size))
         self.account_entry.grid(row=0, column=1, sticky="ew", pady=(0, 10))
 
         ttk.Label(login_frame, text="PIN:", style="Login.TLabel").grid(row=1, column=0, sticky="w", pady=(0, 10))
-        self.pin_entry = ttk.Entry(login_frame, font=("Segoe UI", 12), show="*")
+        self.pin_entry = ttk.Entry(login_frame, font=("Segoe UI", self.base_font_size), show="*")
         self.pin_entry.grid(row=1, column=1, sticky="ew", pady=(0, 10))
 
         login_btn = ttk.Button(login_frame, text="Se Connecter", command=self.authenticate)
@@ -102,45 +125,46 @@ class BankClientApp:
         reg_frame = ttk.Frame(self.root, style="Login.TFrame", padding="30")
         reg_frame.grid(row=0, column=0, sticky="nsew")
 
-        reg_frame.grid_rowconfigure(list(range(12)), weight=0)
+        for i in range(12):
+            reg_frame.grid_rowconfigure(i, weight=0)
         reg_frame.grid_columnconfigure(1, weight=1)
 
         ttk.Label(reg_frame, text="Inscription", style="Header.TLabel").grid(row=0, column=0, columnspan=2, pady=(0, 20))
 
         ttk.Label(reg_frame, text="PIN:", style="Login.TLabel").grid(row=1, column=0, sticky="w", pady=5)
-        pin_entry = ttk.Entry(reg_frame, font=("Segoe UI", 12), show="*")
+        pin_entry = ttk.Entry(reg_frame, font=("Segoe UI", self.base_font_size), show="*")
         pin_entry.grid(row=1, column=1, sticky="ew", pady=5)
 
         ttk.Label(reg_frame, text="Nom:", style="Login.TLabel").grid(row=2, column=0, sticky="w", pady=5)
-        nom_entry = ttk.Entry(reg_frame, font=("Segoe UI", 12))
+        nom_entry = ttk.Entry(reg_frame, font=("Segoe UI", self.base_font_size))
         nom_entry.grid(row=2, column=1, sticky="ew", pady=5)
 
         ttk.Label(reg_frame, text="Prénom:", style="Login.TLabel").grid(row=3, column=0, sticky="w", pady=5)
-        prenom_entry = ttk.Entry(reg_frame, font=("Segoe UI", 12))
+        prenom_entry = ttk.Entry(reg_frame, font=("Segoe UI", self.base_font_size))
         prenom_entry.grid(row=3, column=1, sticky="ew", pady=5)
 
         ttk.Label(reg_frame, text="Adresse:", style="Login.TLabel").grid(row=4, column=0, sticky="w", pady=5)
-        adresse_entry = ttk.Entry(reg_frame, font=("Segoe UI", 12))
+        adresse_entry = ttk.Entry(reg_frame, font=("Segoe UI", self.base_font_size))
         adresse_entry.grid(row=4, column=1, sticky="ew", pady=5)
 
         ttk.Label(reg_frame, text="Code Postal:", style="Login.TLabel").grid(row=5, column=0, sticky="w", pady=5)
-        cp_entry = ttk.Entry(reg_frame, font=("Segoe UI", 12))
+        cp_entry = ttk.Entry(reg_frame, font=("Segoe UI", self.base_font_size))
         cp_entry.grid(row=5, column=1, sticky="ew", pady=5)
 
         ttk.Label(reg_frame, text="Ville:", style="Login.TLabel").grid(row=6, column=0, sticky="w", pady=5)
-        ville_entry = ttk.Entry(reg_frame, font=("Segoe UI", 12))
+        ville_entry = ttk.Entry(reg_frame, font=("Segoe UI", self.base_font_size))
         ville_entry.grid(row=6, column=1, sticky="ew", pady=5)
 
         ttk.Label(reg_frame, text="Téléphone Fixe:", style="Login.TLabel").grid(row=7, column=0, sticky="w", pady=5)
-        tel_fixe_entry = ttk.Entry(reg_frame, font=("Segoe UI", 12))
+        tel_fixe_entry = ttk.Entry(reg_frame, font=("Segoe UI", self.base_font_size))
         tel_fixe_entry.grid(row=7, column=1, sticky="ew", pady=5)
 
         ttk.Label(reg_frame, text="Téléphone Portable:", style="Login.TLabel").grid(row=8, column=0, sticky="w", pady=5)
-        tel_portable_entry = ttk.Entry(reg_frame, font=("Segoe UI", 12))
+        tel_portable_entry = ttk.Entry(reg_frame, font=("Segoe UI", self.base_font_size))
         tel_portable_entry.grid(row=8, column=1, sticky="ew", pady=5)
 
         ttk.Label(reg_frame, text="Type de Compte:", style="Login.TLabel").grid(row=9, column=0, sticky="w", pady=5)
-        type_compte_combo = ttk.Combobox(reg_frame, font=("Segoe UI", 12), state="readonly")
+        type_compte_combo = ttk.Combobox(reg_frame, font=("Segoe UI", self.base_font_size), state="readonly")
         type_compte_combo['values'] = (
             "Compte courant",
             "Livret d'épargne",

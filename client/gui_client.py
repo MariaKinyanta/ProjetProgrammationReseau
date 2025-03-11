@@ -211,7 +211,7 @@ class BankClientApp:
         header_frame.grid(row=0, column=0, sticky="ew")
         self.info_label = ttk.Label(
             header_frame,
-            text=f"Bienvenue, {self.client_name} (compte {self.account_number}) | Solde : N/A",
+            text=f"Bienvenue, {self.client_name} (compte {self.account_number}) \n| Solde : N/A",
             style="Header.TLabel"
         )
         self.info_label.pack(anchor="center", pady=10)
@@ -274,8 +274,7 @@ class BankClientApp:
 
     def start_auto_refresh(self):
         """
-        Rafraîchit automatiquement le solde et l'historique toutes les 10 secondes,
-        tant que la session est active.
+        Rafraîchit automatiquement 10sec
         """
         if self.session_active:
             self.update_account_info()
@@ -285,7 +284,7 @@ class BankClientApp:
     def update_account_info(self):
         response = socket_handler.send_request(f"SOLDE {self.account_number}", SERVER_HOST, SERVER_PORT, CAFILE)
         solde = response.split()[1] if response.startswith("SOLDE") and len(response.split()) > 1 else "N/A"
-        info_text = f"Bienvenue, {self.client_name} (compte {self.account_number}) | Solde : {solde} €"
+        info_text = f"Bienvenue, {self.client_name} (compte {self.account_number}) \n| Solde : {solde} €"
         self.info_label.config(text=info_text)
 
     def clear_screen(self):
