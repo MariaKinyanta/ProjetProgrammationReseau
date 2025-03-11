@@ -8,3 +8,29 @@
 2025-02-16 18:14:53,526 - __main__ - ERROR - Erreur lors de l'envoi de la requête: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: IP address mismatch, certificate is not valid for '127.0.0.1'. (_ssl.c:1007)
 2025-02-16 18:33:06,559 - __main__ - INFO - Envoi de la requête: TESTPIN 123456 0000
 2025-02-16 19:33:27,343 - __main__ - INFO - Envoi de la requête: TESTPIN 123456 0000
+2025-03-10 20:34:17,490 - client.socket_handler - INFO - Connexion à 127.0.0.1:5001
+2025-03-10 20:34:17,510 - client.socket_handler - INFO - Connexion sécurisée établie avec 127.0.0.1:5001
+2025-03-10 20:42:42,608 - client.socket_handler - INFO - Connexion à 127.0.0.1:5001
+2025-03-10 20:42:42,654 - client.socket_handler - INFO - Connexion sécurisée établie avec 127.0.0.1:5001
+2025-03-10 20:46:52,013 - client.security - INFO - Utilisation du fichier CA : /home/maria/Documents/Cours de master 2/Programmation reseau/Projet final/ProjetFinalProgrammationReseau/dummy_cafile
+2025-03-10 20:46:52,013 - client.security - INFO - Connexion sécurisée avec TLS établie.
+2025-03-10 20:51:09,370 - client.socket_handler - INFO - Connexion à 127.0.0.1:5001
+2025-03-10 20:51:09,374 - client.socket_handler - INFO - Connexion sécurisée établie avec 127.0.0.1:5001
+2025-03-11 10:09:09,621 - client.security - INFO - Utilisation du fichier CA : /home/maria/Documents/Cours de master 2/Programmation reseau/Projet final/ProjetFinalProgrammationReseau/dummy_cafile
+2025-03-11 10:09:09,640 - client.security - INFO - Connexion sécurisée avec TLS établie.
+2025-03-11 10:17:14,394 - client.security - INFO - Utilisation du fichier CA : /home/maria/Documents/Cours de master 2/Programmation reseau/Projet final/ProjetFinalProgrammationReseau/dummy_cafile
+2025-03-11 10:17:14,394 - client.security - INFO - Connexion sécurisée avec TLS établie.
+2025-03-11 10:21:34,265 - client.security - INFO - Utilisation du fichier CA : /home/maria/Documents/Cours de master 2/Programmation reseau/Projet final/ProjetFinalProgrammationReseau/dummy_cafile
+2025-03-11 10:21:34,265 - client.security - INFO - Connexion sécurisée avec TLS établie.
+2025-03-11 10:22:02,768 - client.socket_handler - INFO - Connexion à 127.0.0.1:5001
+2025-03-11 10:22:02,774 - client.socket_handler - INFO - Connexion sécurisée établie avec 127.0.0.1:5001
+2025-03-11 10:24:08,977 - client.security - INFO - Utilisation du fichier CA : /home/maria/Documents/Cours de master 2/Programmation reseau/Projet final/ProjetFinalProgrammationReseau/dummy_cafile
+2025-03-11 10:24:08,978 - client.security - INFO - Connexion sécurisée avec TLS établie.
+2025-03-11 10:24:17,562 - client.socket_handler - INFO - Connexion à 127.0.0.1:5001
+2025-03-11 10:24:17,566 - client.socket_handler - INFO - Connexion sécurisée établie avec 127.0.0.1:5001
+2025-03-11 10:36:47,074 - client.socket_handler - INFO - Connexion à 127.0.0.1:5001
+2025-03-11 10:36:47,079 - client.socket_handler - INFO - Connexion sécurisée établie avec 127.0.0.1:5001
+2025-03-11 10:38:38,293 - client.socket_handler - INFO - Connexion à 127.0.0.1:5001
+2025-03-11 10:38:38,299 - client.socket_handler - INFO - Connexion sécurisée établie avec 127.0.0.1:5001
+2025-03-11 10:39:03,218 - client.security - INFO - Utilisation du fichier CA : /home/maria/Documents/Cours de master 2/Programmation reseau/Projet final/ProjetFinalProgrammationReseau/dummy_cafile
+2025-03-11 10:39:03,218 - client.security - INFO - Connexion sécurisée avec TLS établie.

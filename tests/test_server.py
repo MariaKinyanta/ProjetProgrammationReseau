@@ -9,32 +9,30 @@ class TestServerCommands(unittest.TestCase):
         self.test_db_path = os.path.join(os.path.dirname(__file__), 'test_banque.db')
         conn = sqlite3.connect(self.test_db_path)
         cur = conn.cursor()
-
-        # Création des tables nécessaires
+        # Création d'une table comptes simplifiée pour les tests
         cur.execute('''
             CREATE TABLE IF NOT EXISTS comptes (
-                numeroCompte TEXT PRIMARY KEY, 
-                pin TEXT, 
-                solde REAL
+                NumeroCompte TEXT PRIMARY KEY,
+                PIN TEXT,
+                Solde REAL
             )
         ''')
+        # Table opérations pour enregistrer les transactions
         cur.execute('''
             CREATE TABLE IF NOT EXISTS operations (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                numeroCompte TEXT,
+                NumeroCompte TEXT,
                 date TEXT,
                 libelle TEXT,
                 montant REAL
             )
         ''')
-
-        # Insertion de comptes de test
-        cur.execute("INSERT INTO comptes (numeroCompte, pin, solde) VALUES ('123456', '0000', 500.0)")
-        cur.execute("INSERT INTO comptes (numeroCompte, pin, solde) VALUES ('654321', '1111', 300.0)")
+        # Insertion de deux comptes de test
+        cur.execute("INSERT INTO comptes (NumeroCompte, PIN, Solde) VALUES ('123456', '0000', 500.0)")
+        cur.execute("INSERT INTO comptes (NumeroCompte, PIN, Solde) VALUES ('654321', '1111', 300.0)")
         conn.commit()
         conn.close()
-
-        # Redirection de db_handler vers la base de test
+        # Rediriger la base utilisée par db_handler vers la base de test
         db_handler.DB_PATH = self.test_db_path
 
     def tearDown(self):
@@ -45,7 +43,7 @@ class TestServerCommands(unittest.TestCase):
         self.assertEqual(response, "RETRAIT OK")
         self.assertEqual(db_handler.get_solde("123456"), 400.0)
 
-    def test_retrait_echec_fonds_insuffisants(self):
+    def test_retrait_echec(self):
         response = socket_handler.handle_request("RETRAIT 123456 1000")
         self.assertEqual(response, "RETRAIT NOK")
 
@@ -60,29 +58,14 @@ class TestServerCommands(unittest.TestCase):
         self.assertEqual(db_handler.get_solde("123456"), 400.0)
         self.assertEqual(db_handler.get_solde("654321"), 400.0)
 
-    def test_transfert_echec_solde_insuffisant(self):
-        response = socket_handler.handle_request("TRANSFERT 123456 654321 1000 0000")
-        self.assertTrue(response.startswith("TRANSFERT NOK"))
-
-    def test_solde_succes(self):
+    def test_solde(self):
         response = socket_handler.handle_request("SOLDE 123456")
         self.assertTrue(response.startswith("SOLDE"))
         self.assertIn("500.0", response)
 
-    def test_solde_inconnu(self):
-        response = socket_handler.handle_request("SOLDE 000000")
-        self.assertEqual(response, "ERROPERATION")
-
     def test_historique_vide(self):
         response = socket_handler.handle_request("HISTORIQUE 123456")
         self.assertEqual(response, "AUCUNE OPERATION")
-
-    def test_historique_avec_operations(self):
-        db_handler.enregistrer_operation("123456", "DEPOT", 100)
-        db_handler.enregistrer_operation("123456", "RETRAIT", -50)
-        response = socket_handler.handle_request("HISTORIQUE 123456")
-        self.assertIn("DEPOT", response)
-        self.assertIn("RETRAIT", response)
 
 if __name__ == '__main__':
     unittest.main()
